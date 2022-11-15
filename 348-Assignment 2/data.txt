@@ -1,4 +1,4 @@
-John|21|123 Gouin St|5140982080
+John|  21|   123     Gouin St|
 Clio|20|908 Main St|4388758646
 Manny|64|1082 Boulevard Casagrin|5147292838
 Wick|30|2010 Chemin Cavendish|4389098765
