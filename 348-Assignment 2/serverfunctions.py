@@ -43,3 +43,7 @@ def spaceStrip(word):
             newWord = newWord + character
 
     return newWord
+
+
+def printReport(dataset): 
+    dataset.values()
