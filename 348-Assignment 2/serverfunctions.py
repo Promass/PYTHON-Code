@@ -3,8 +3,8 @@ def loadData(fileName):
     datafile = open(fileName)
 
     for line in datafile:
-        parsedLine = parseLine(line)
-        dataList[parsedLine[0]] = parsedLine
+        innerDict = parseLine(line)
+        dataList[innerDict.get("name")] = innerDict
 
     datafile.close()
 
@@ -12,22 +12,26 @@ def loadData(fileName):
 
 
 def parseLine(line):
-    lineList = []
+    innerDict = {}
     word = ""
+    innerDictKey = ["name", "age", "address", "number"]
+    innerDictIdx = 0
 
     for charac in line:
         if (charac == "\n"):
             word = spaceStrip(word)
-            lineList.append(word)
+            innerDict[innerDictKey[innerDictIdx]] = word
+            innerDictIdx = innerDictIdx + 1
             break
         elif (charac != "|"):
             word = word + str(charac)
         else:
             word = spaceStrip(word)
-            lineList.append(word)
+            innerDict[innerDictKey[innerDictIdx]] = word
+            innerDictIdx = innerDictIdx + 1
             word = ""
     
-    return lineList
+    return innerDict
 
 
 def spaceStrip(word):
@@ -46,4 +50,12 @@ def spaceStrip(word):
 
 
 def printReport(dataset): 
-    dataset.values()
+    data_values = "** Python DB Content **\n"
+
+    for outerKey in dataset:
+        for innerKey in dataset[outerKey]:
+            data_values = data_values + dataset[outerKey][innerKey]
+            data_values = data_values + "|"
+        data_values = data_values + "\n"
+
+    return data_values

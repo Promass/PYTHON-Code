@@ -1,9 +1,11 @@
 import socket
 import serverfunctions
+import pickle
 
 dataset = serverfunctions.loadData("data.txt")
+print(serverfunctions.printReport(dataset))
 
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+'''server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((socket.gethostname(), 9999))
 server.listen(1)
 
@@ -22,8 +24,6 @@ while True:
             case "2":
                 clientsocket.send(bytes("Received 2", "utf-8"))
             case "7":
-                clientsocket.send(dataset.values())
-        
-
-
-
+                msg = pickle.dumps(dataset)
+                clientsocket.send(bytes(msg, "utf-8"))
+'''

@@ -1,6 +1,7 @@
 # cd 'PYTHON-Code/348-Assignment 2'
 
 import socket
+import pickle
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.connect((socket.gethostname(), 9999))
@@ -32,6 +33,8 @@ while True:
             break
 
     server_output = server.recv(4096)
+    server_output = pickle.loads(server_output)
+
     print("\n")
     print(server_output)
     print("\n")
