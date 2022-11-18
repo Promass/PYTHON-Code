@@ -1,29 +1,48 @@
 import socket
 import serverfunctions
-import pickle
 
-dataset = serverfunctions.loadData("data.txt")
-print(serverfunctions.printReport(dataset))
+serverfunctions.loadData("data.txt")
 
-'''server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((socket.gethostname(), 9999))
 server.listen(1)
 
 while True:
     clientsocket, address = server.accept()
     print(f"Connection from {address} has been established!")
-    clientsocket.send(bytes("Welcome to the server!", "utf-8"))
+    clientsocket.send(bytes("\nWelcome to the server!", "utf-8"))
 
     while True:
-        request = clientsocket.recv(4096)
-        request = request.decode("utf-8")
+        client_request = clientsocket.recv(4096)
+        client_request = client_request.decode("utf-8")
 
-        match request:
+        match client_request:
             case "1":
-                clientsocket.send(bytes("Received 1", "utf-8"))
+                customer_name = clientsocket.recv(4096)
+                customer_name = customer_name.decode("utf-8")
+                server_response = serverfunctions.findCustomer(customer_name)
+                clientsocket.send(bytes(server_response, "utf-8"))
             case "2":
-                clientsocket.send(bytes("Received 2", "utf-8"))
+                customer_name = clientsocket.recv(4096)
+                customer_name = customer_name.decode("utf-8")
+
+                customer_age = clientsocket.recv(4096)
+                customer_age = customer_age.decode("utf-8")
+
+                customer_address = clientsocket.recv(4096)
+                customer_address = customer_address.decode("utf-8")
+
+                customer_phone = clientsocket.recv(4096)
+                customer_phone = customer_phone.decode("utf-8")
+
+                server_response = serverfunctions.addCustomer(customer_name, customer_age, customer_address, customer_phone)
+                clientsocket.send(bytes(server_response, "utf-8"))
             case "7":
-                msg = pickle.dumps(dataset)
-                clientsocket.send(bytes(msg, "utf-8"))
-'''
+                server_response = serverfunctions.printReport()
+                clientsocket.send(bytes(server_response, "utf-8"))
+            case "8":
+                break
+    clientsocket.close()
+    break
+
+server.close()

@@ -1,14 +1,14 @@
+#SERVER LOAD DATA FUNCTIONS
+dataset = {}
+
 def loadData(fileName):
-    dataList = {}
     datafile = open(fileName)
 
     for line in datafile:
         innerDict = parseLine(line)
-        dataList[innerDict.get("name")] = innerDict
+        dataset[innerDict.get("name")] = innerDict
 
     datafile.close()
-
-    return dataList
 
 
 def parseLine(line):
@@ -17,6 +17,7 @@ def parseLine(line):
     innerDictKey = ["name", "age", "address", "number"]
     innerDictIdx = 0
 
+    line = line + "\n"
     for charac in line:
         if (charac == "\n"):
             word = spaceStrip(word)
@@ -48,14 +49,41 @@ def spaceStrip(word):
 
     return newWord
 
+#SERVER QUERY FUNCTIONS
 
-def printReport(dataset): 
-    data_values = "** Python DB Content **\n"
+def printEntity(key):
+    entity = ""
+    counter = 0
+
+    for innerKey in dataset[key]:
+        entity = entity + dataset[key][innerKey]
+        if (counter < len(dataset[key]) - 1):
+            entity = entity + "|"
+            counter += 1
+
+    entity = entity + "\n"
+
+    return entity
+
+def printReport(): 
+    report = "\n** Python DB Content **\n"
 
     for outerKey in dataset:
-        for innerKey in dataset[outerKey]:
-            data_values = data_values + dataset[outerKey][innerKey]
-            data_values = data_values + "|"
-        data_values = data_values + "\n"
+        report = report + printEntity(outerKey)
 
-    return data_values
+    return report
+
+
+def findCustomer(key):
+    if (key not in dataset):
+        return "\nServer response: " + key + " not dound in database\n"
+    else:
+        return "\nServer response: " + printEntity(key)
+
+
+def addCustomer(customer_name, customer_age, customer_address, customer_phone):
+    if (customer_name not in dataset):
+        dataset[customer_name] = {"name":customer_name, "age":customer_age, "address":customer_address, "number":customer_phone}
+        return "\nServer response: Customer " + customer_name + " added to the database\n"
+    else:
+        return "\nServer response: Customer already exists\n"
