@@ -1,9 +1,4 @@
 # cd 'PYTHON-Code/348-Assignment 2'
-# needs to verify the inputs, if they are empty don't send to send empty
-# have a default switch case 
-# add buffersize so all data goes through
-# try to send all inputs at the same time
-# maybe make functions for promt
 # comment all code to clarify
 # other quality checks
 # test all posibilites, make sure no crashes
@@ -29,50 +24,57 @@ while True:
 
     user_input = input("Select: ")
 
-    match user_input:
-        case "1":
-            customer_name = input("Customer Name: ")
-            server.send(bytes("1", "utf-8"))
-            server.send(bytes(customer_name, "utf-8"))
-        case "2":
-            customer_name = input("Customer Name: ")
-            customer_age = input("Customer Age: ")
-            customer_address = input("Customer Address: ")
-            customer_phone = input("Customer Phone Number: ")
-            server.send(bytes("2", "utf-8"))
-            server.send(bytes(customer_name, "utf-8"))
-            server.send(bytes(customer_age, "utf-8"))
-            server.send(bytes(customer_address, "utf-8"))
-            server.send(bytes(customer_phone, "utf-8"))
-        case "3":
-            customer_name = input("Customer Name: ")
-            server.send(bytes("3", "utf-8"))
-            server.send(bytes(customer_name, "utf-8"))
-        case "4":
-            customer_name = input("Customer Name: ")
-            customer_age = input("Customer Age: ")
-            server.send(bytes("4", "utf-8"))
-            server.send(bytes(customer_name, "utf-8"))
-            server.send(bytes(customer_age, "utf-8"))
-        case "5":
-            customer_name = input("Customer Name: ")
-            customer_address = input("Customer Address: ")
-            server.send(bytes("5", "utf-8"))
-            server.send(bytes(customer_name, "utf-8"))
-            server.send(bytes(customer_address, "utf-8"))
-        case "6":
-            customer_name = input("Customer Name: ")
-            customer_phone = input("Customer Phone Number: ")
-            server.send(bytes("6", "utf-8"))
-            server.send(bytes(customer_name, "utf-8"))
-            server.send(bytes(customer_phone, "utf-8"))
-        case "7":
-            server.send(bytes("7", "utf-8"))
-        case "8":
-            server.send(bytes("8", "utf-8"))
-            break
+    if (user_input == ""):
+        print("\nPlease enter a number from 1 to 8\n")
+        continue
+    else:
+        match user_input:
+            case "1":
+                customer_name = input("Customer Name: ")
+                server.send(bytes("1", "utf-8"))
+                server.send(bytes(customer_name, "utf-8"))
+            case "2":
+                customer_name = input("Customer Name: ")
+                customer_age = input("Customer Age: ")
+                customer_address = input("Customer Address: ")
+                customer_phone = input("Customer Phone Number: ")
+                server.send(bytes("2", "utf-8"))
+                server.send(bytes(customer_name, "utf-8"))
+                server.send(bytes(customer_age, "utf-8"))
+                server.send(bytes(customer_address, "utf-8"))
+                server.send(bytes(customer_phone, "utf-8"))
+            case "3":
+                customer_name = input("Customer Name: ")
+                server.send(bytes("3", "utf-8"))
+                server.send(bytes(customer_name, "utf-8"))
+            case "4":
+                customer_name = input("Customer Name: ")
+                customer_age = input("Customer Age: ")
+                server.send(bytes("4", "utf-8"))
+                server.send(bytes(customer_name, "utf-8"))
+                server.send(bytes(customer_age, "utf-8"))
+            case "5":
+                customer_name = input("Customer Name: ")
+                customer_address = input("Customer Address: ")
+                server.send(bytes("5", "utf-8"))
+                server.send(bytes(customer_name, "utf-8"))
+                server.send(bytes(customer_address, "utf-8"))
+            case "6":
+                customer_name = input("Customer Name: ")
+                customer_phone = input("Customer Phone Number: ")
+                server.send(bytes("6", "utf-8"))
+                server.send(bytes(customer_name, "utf-8"))
+                server.send(bytes(customer_phone, "utf-8"))
+            case "7":
+                server.send(bytes("7", "utf-8"))
+            case "8":
+                server.send(bytes("8", "utf-8"))
+                break
+            case _:
+                print("\nInvalid command\n")
+                continue
 
-    server_response = server.recv(4096)
-    server_response = server_response.decode("utf-8")
+        server_response = server.recv(4096)
+        server_response = server_response.decode("utf-8")
 
-    print(server_response)
+        print(server_response)
