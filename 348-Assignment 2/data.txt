@@ -1,4 +1,20 @@
 John|21|123 Gouin St
-Clio|20|908 Main St|4388758646
-Manny|41|1082 Boulevard Casagrin|5147292838
-Wick|30|2010 Chemin Cavendish|4389098765
+Clio|20|908 Main St|438-875-8646
+Manny|41|1082 Boulevard Casagrin|514-729-2838
+Wick|30|2010 Chemin Cavendish|438-909-8765
+Benny||123 Rue Rene
+ |16|454 Square st|438-789-0989
+Queen   |    |123 Rue brossard|439-123-6785
+King|15|567 Rue clover|123-456-0989
+Max|67   |567 Rue sherbrook|123-545-7546
+Tim|50
+Kevin|||||
+Lauren|56|70 Rue        Gouin|123-545-5645
+Jerry|||908-927-2373
+Tom|89|68 Rue Peel|123-532-2342
+Ohio|||
+Lex|56|50 Rue Guy|152-123-5463
+Blade|23||
+Maxime|73|123 St-martin|323-645-3424
+Brian
+|||
